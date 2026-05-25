@@ -39,6 +39,12 @@ Skills live in `.claude/skills/`. Each skill is a folder: `.claude/skills/skill-
 
 Skills are built organically as recurring workflows solidify. See **Skills Backlog** below.
 
+### Active Skills
+
+| Skill | Command | What it does |
+|---|---|---|
+| niche-research | `/niche-research [optional topic]` | Researches trending AI topics, surfaces 5 angles and source links, saves brief to `references/research/` |
+
 ## Decision Log
 
 All meaningful decisions go in `decisions/log.md`. Append-only. Never edit past entries.
@@ -78,7 +84,7 @@ Workflows to build into skills as they solidify:
 1. **LinkedIn Post Creator** — Research niche topic, write post, format for LinkedIn
 2. **Content Repurposing** — Take one piece of content, adapt for TikTok, Instagram, Skool
 3. **Canva Visual Brief** — Turn a post idea into a Canva design brief
-4. **Niche Research Agent** — Find trending AI topics for solopreneurs, summarize key angles
+4. ~~**Niche Research Agent**~~ — BUILT: `/niche-research`
 5. **Session Closeout** — Fill in `templates/session-summary.md` and log decisions
 6. **Client Audit Template** — Structure a discovery call for AI workflow auditing
 7. **Weekly Content Plan** — Plan the week's content across all channels
