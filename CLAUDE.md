@@ -44,6 +44,7 @@ Skills are built organically as recurring workflows solidify. See **Skills Backl
 | Skill | Command | What it does |
 |---|---|---|
 | niche-research | `/niche-research [optional topic]` | Researches trending AI topics, surfaces 5 angles and source links, saves brief to `references/research/` |
+| linkedin-post | `/linkedin-post [topic or brief path]` | Writes 2 maximally contrasting LinkedIn post drafts (150-300 words each), saves to `projects/content-creation-system/drafts/` |
 
 ## Decision Log
 
@@ -81,7 +82,7 @@ Memory + context files + decision log = the assistant gets smarter over time wit
 
 Workflows to build into skills as they solidify:
 
-1. **LinkedIn Post Creator** — Research niche topic, write post, format for LinkedIn
+1. ~~**LinkedIn Post Creator**~~ — BUILT: `/linkedin-post`
 2. **Content Repurposing** — Take one piece of content, adapt for TikTok, Instagram, Skool
 3. **Canva Visual Brief** — Turn a post idea into a Canva design brief
 4. ~~**Niche Research Agent**~~ — BUILT: `/niche-research`
