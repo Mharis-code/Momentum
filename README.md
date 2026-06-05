@@ -10,6 +10,24 @@
 +--------------------------------------------------------------------------+
 ```
 
+<p align="center"><strong>The complete AI business system for solopreneurs.</strong></p>
+
+<br>
+
+<p align="center">
+  <img src="https://img.shields.io/static/v1?label=&message=OFFER&color=6366f1&style=for-the-badge" alt="OFFER" />
+  &nbsp;&nbsp;→&nbsp;&nbsp;
+  <img src="https://img.shields.io/static/v1?label=&message=ATTENTION&color=f97316&style=for-the-badge" alt="ATTENTION" />
+  &nbsp;&nbsp;→&nbsp;&nbsp;
+  <img src="https://img.shields.io/static/v1?label=&message=CONVERSION&color=22c55e&style=for-the-badge" alt="CONVERSION" />
+  &nbsp;&nbsp;→&nbsp;&nbsp;
+  <img src="https://img.shields.io/static/v1?label=&message=DELIVERY&color=3b82f6&style=for-the-badge" alt="DELIVERY" />
+  &nbsp;&nbsp;→&nbsp;&nbsp;
+  <img src="https://img.shields.io/static/v1?label=&message=FEEDBACK&color=ec4899&style=for-the-badge" alt="FEEDBACK" />
+</p>
+
+<br>
+
 A Claude Code agent that builds a complete business strategy for any 1-person service business. Built on frameworks from Alex Hormozi ($100M Offers, $100M Leads), Daniel Priestley (Oversubscribed, Key Person of Influence), and Russell Brunson (DotCom Secrets, Expert Secrets).
 
 Type `/momentum` to start. Answer 7 questions. Get a complete 90-day action plan.
