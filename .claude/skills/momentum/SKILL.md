@@ -376,9 +376,47 @@ Generate and save as `projects/momentum/[slug]/90-day-plan.html`.
       .cover { margin: 0; page-break-after: always; }
       .month { page-break-inside: avoid; }
     }
+
+    /* TAB NAVIGATION */
+    .tab-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      gap: 2px;
+      background: var(--primary);
+      padding: 0 24px;
+      margin: 0 -24px 0;
+    }
+    .tab-btn {
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: rgba(255,255,255,0.9); }
+    .tab-btn.active {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
   </style>
 </head>
 <body>
+
+  <nav class="tab-bar">
+    <button class="tab-btn active" data-tab="plan">90-Day Plan</button>
+    <!-- TAB-BUTTONS-END -->
+  </nav>
+
+  <div class="tab-content active" id="tab-plan">
 
   <!-- COVER -->
   <div class="cover">
@@ -549,8 +587,28 @@ Generate and save as `projects/momentum/[slug]/90-day-plan.html`.
       <li><code>outreach.md</code> — DM templates, content hooks, daily rhythm</li>
       <li><code>sales.md</code> — CLOSER talk track, pre-call brief, follow-up scripts</li>
       <li><code>follow-up.md</code> — Reactivation sequences, testimonial requests, objection log</li>
+      <li><code>brand-voice.md</code> — Brand foundation (added when /brand-voice is run)</li>
+      <li><code>funnel.md</code> — Lead gen funnel and landing page copy (added when /funnel-architect is run)</li>
+      <li><code>content-engine.md</code> — Multi-platform content output (added when /content-engine is run)</li>
+      <li><code>case-study.md</code> — Client proof assets (added when /case-study is run)</li>
+      <li><code>onboarding.md</code> — Client onboarding kit (added when /client-onboard is run)</li>
     </ul>
+    <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">Run extended agents with this folder path to add new tabs to this dashboard.</p>
   </div>
+
+  </div><!-- end tab-content #tab-plan -->
+  <!-- TAB-CONTENT-END -->
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
 
 </body>
 </html>
@@ -559,6 +617,40 @@ Generate and save as `projects/momentum/[slug]/90-day-plan.html`.
 Fill in all `[bracketed]` placeholders with the actual content extracted from the 5 output files. The HTML template above shows structure and styling — every section must contain real data from the agents, not placeholder text.
 
 When generating the HTML: substitute `[PRIMARY]` with the actual hex value, `[PRIMARY_LIGHT]` with an rgba or hex tint of the primary color at ~8% opacity on white.
+
+---
+
+### 6c: Check for Extended Agent Files
+
+After generating the base 90-Day Plan tab, check whether any extended agent output files exist in `projects/momentum/[slug]/`. For each that exists, add its tab to the HTML before saving.
+
+**Tab insertion method (same method all extended skills use):**
+1. Insert a tab button before `<!-- TAB-BUTTONS-END -->`:
+   `<button class="tab-btn" data-tab="[tab-id]">[Label]</button>`
+2. Insert a tab content block before `<!-- TAB-CONTENT-END -->`:
+   `<div class="tab-content" id="tab-[tab-id]">[rendered HTML content]</div>`
+3. If a tab with that `data-tab` ID already exists (re-compile), replace the content block rather than inserting again.
+
+**Files to check and their tab IDs / labels:**
+
+| File | Tab ID | Tab Label | Content to render |
+|------|--------|-----------|-------------------|
+| `brand-voice.md` | `brand-voice` | Brand Voice | Signature story, one-liner, content pillars, platform bios, tone guide, 7-11-4 audit — styled as cards with brand color headings |
+| `funnel.md` | `funnel` | Funnel Strategy | Lead magnet options, landing page copy, email sequence, bio CTAs, weekly rhythm table, booking page brief — structured document |
+| `funnel.md` (landing page section only) | `landing-page` | Landing Page | Extract only the landing page copy and render it as a proper full-width landing page (hero section, bullets, CTA button, trust line) — no tab chrome inside |
+| `content-engine*.md` | `content-engine` | Content Engine | All platform posts (LinkedIn, TikTok script, Instagram captions, Skool), repurposing map, calendar — formatted with platform headers |
+| `case-study*.md` | `case-study` | Case Study | Before/after layout, quote block, LinkedIn post preview, DM proof blocks — one-pager style |
+| `onboarding.md` | `onboard` | Client Onboard | Welcome message, kick-off agenda, project brief, first-week checklist, communication cadence — section-by-section |
+
+**Landing Page tab styling spec (when rendering the `landing-page` tab from funnel.md):**
+The landing page tab content must look like an actual deployable landing page — not a document. Use these inner styles scoped to `#tab-landing-page`:
+- Full-width hero block with `background: var(--primary)`, white headline text, subheadline
+- White body section, max-width 640px, centered
+- Benefit bullets as large check-list items
+- Social proof block as a styled testimonial card with quote marks
+- CTA button: `background: var(--primary)`, white text, large padding, border-radius 8px, full width on mobile
+- Trust line below button in muted text
+- No nav, no footer, no document headers
 
 ---
 
@@ -581,9 +673,9 @@ Files saved to: projects/momentum/[slug]/
   - outreach.md
   - sales.md
   - follow-up.md
-  - 90-day-plan.html  ← open this in your browser
+  - 90-day-plan.html  ← open this in your browser (tabbed dashboard — gains new tabs as extended agents run)
 
-Start with 90-day-plan.html. Open it in any browser — it's organized by month, follow it in order.
+Start with 90-day-plan.html. Open it in any browser — it's organized by month, follow it in order. Each time you run an extended agent (/brand-voice, /funnel-architect, /content-engine, /case-study, /client-onboard) and pass this folder path, a new tab will be added to this file.
 
 Loop completed: Offer → Attention → Conversion → Delivery → Feedback
 Run /client-onboard when your first client closes.
@@ -604,6 +696,6 @@ After the Week 1 sprint is saved, tell the user: "Week 1 sprint saved to project
 - Never skip the intake. Even if $ARGUMENTS describes the business, confirm the 7 answers before proceeding.
 - Never call the next agent until the current one has saved its output file.
 - The 90-day-plan.html must be self-contained. Someone should be able to open it in a browser without any other files. No external CSS, CDN, or font links.
-- Only the 90-day plan uses HTML output. All other output files (market.md, offer.md, outreach.md, sales.md, follow-up.md, profile.md) remain markdown.
+- The 90-day-plan.html is the master tabbed dashboard. Core agent outputs (market.md, offer.md, outreach.md, sales.md, follow-up.md, profile.md) remain markdown only. Extended agents (brand-voice, funnel-architect, content-engine, case-study, client-onboard) add HTML tabs to this file when called with a Momentum project folder path. All extended agent outputs must also exist as .md files.
 - Do not add features, coaching, or extra commentary beyond what the 5 agents produce. The orchestrator compiles — it does not editorialize.
 - If any agent fails or produces incomplete output: report the failure, explain what is missing, and ask the user whether to retry or proceed without that section.

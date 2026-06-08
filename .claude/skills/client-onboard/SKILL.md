@@ -2,7 +2,7 @@
 name: client-onboard
 stage: delivery
 description: Use when a client has just closed and you need to set up the first 7 days professionally. Takes a client description — outputs a welcome message, kick-off call agenda, project brief template, first-week milestone checklist, and communication cadence. Sets the professional tone that earns referrals. Standalone.
-argument-hint: [describe the new client: name, what they hired you for, start date, any context]
+argument-hint: [describe the new client: name, what they hired you for, start date, any context | optionally append a Momentum project folder path to add output to 90-day-plan.html]
 ---
 
 # Client Onboard — The Professional First 7 Days
@@ -269,6 +269,41 @@ File format:
 ```
 
 Tell the user the file path. Remind them to send the welcome message today — not tomorrow, not after the kick-off call is scheduled. Same-day welcome messages set the tone that all subsequent communication will match.
+
+---
+
+## Step 8: Generate HTML Output
+
+**Detect Momentum context:**
+- If `$ARGUMENTS` contained a path to a Momentum project folder (a folder containing `90-day-plan.html`), set `IS_MOMENTUM=true` and `MOMENTUM_FOLDER=[that path]`
+- If IS_MOMENTUM=true, also save the onboarding content to `[MOMENTUM_FOLDER]/onboarding.md`
+
+**Generate the HTML:**
+
+Create a self-contained onboarding kit HTML — a clean, professional reference document the consultant can open during and between client calls. Use `#1B6CA8` as the default primary color, or the Momentum project's brand color if available.
+
+Sections to render:
+- **Welcome Message** — styled email preview card (white card, email subject line as header, body text with subtle border-left accent)
+- **Kick-Off Call Agenda** — vertical timeline layout: numbered steps with time allocations, each step in a card
+- **Project Brief** — form-style layout with labeled sections (Scope, Success Criteria, Timeline as HTML table, Communication, Payment), signature lines at the bottom
+- **First-Week Checklist** — two columns side by side labeled "Consultant" and "Client", each item as a checkbox row
+- **Communication Cadence** — rules block styled as a summary card
+
+The HTML must be self-contained (no external CSS, CDN, or font links). Use `system-ui, -apple-system, sans-serif`.
+
+**If IS_MOMENTUM=true — update 90-day-plan.html:**
+1. Read `[MOMENTUM_FOLDER]/90-day-plan.html`
+2. Find `<!-- TAB-BUTTONS-END -->` and insert before it:
+   `<button class="tab-btn" data-tab="onboard">Client Onboard</button>`
+3. Find `<!-- TAB-CONTENT-END -->` and insert before it the full HTML content wrapped in:
+   `<div class="tab-content" id="tab-onboard">[rendered HTML content]</div>`
+4. If `data-tab="onboard"` already exists (re-run), replace the existing content block.
+5. Save the modified `90-day-plan.html`.
+6. Tell the user: "Client Onboard tab added to 90-day-plan.html."
+
+**If standalone (no Momentum folder):**
+- Save as `projects/clients/[client-slug]/onboarding.html`
+- Tell the user the path.
 
 ---
 

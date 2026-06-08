@@ -324,6 +324,205 @@ Tell the user the file path. Remind them that to produce the actual posts for th
 
 ---
 
+## Step 9: Generate HTML Outputs
+
+This step produces TWO HTML outputs: a Funnel Strategy document and a standalone Landing Page.
+
+**Detect Momentum context:**
+- If `$ARGUMENTS` contained a path to a Momentum project folder (a folder containing `90-day-plan.html`), set `IS_MOMENTUM=true` and `MOMENTUM_FOLDER=[that path]`
+
+**Read brand color:** If IS_MOMENTUM=true, check `[MOMENTUM_FOLDER]/90-day-plan.html` for the `--primary` CSS variable. Use that value as `PRIMARY`. If not found, use `#1B6CA8`.
+
+---
+
+### Output A — Funnel Strategy HTML
+
+A styled reference document with all funnel components. Self-contained, no external dependencies.
+
+Sections to render:
+- **Lead Magnet** — selected option in a callout card (name, format, why it works), dismissed options below in muted text
+- **Landing Page Copy** — headline as large text, subheadline, 3 benefit bullets, social proof placeholder styled as a testimonial card, CTA button text, trust line
+- **Welcome Sequence** — 5 email cards, one per day, each with subject line in bold and body text
+- **Platform Bio CTAs** — card per platform with character count badge
+- **Weekly Posting Rhythm** — the 4-week Mon/Wed/Fri table rendered as an HTML table
+- **Booking Page Brief** — formatted as a spec card with all sections
+
+**If IS_MOMENTUM=true — insert Funnel Strategy tab into 90-day-plan.html:**
+1. Read `[MOMENTUM_FOLDER]/90-day-plan.html`
+2. Find `<!-- TAB-BUTTONS-END -->` and insert before it:
+   `<button class="tab-btn" data-tab="funnel">Funnel Strategy</button>`
+3. Find `<!-- TAB-CONTENT-END -->` and insert before it the Funnel Strategy HTML wrapped in:
+   `<div class="tab-content" id="tab-funnel">[funnel strategy content]</div>`
+4. If `data-tab="funnel"` already exists (re-run), replace the existing content block.
+
+**If standalone:** Save as `[output_folder]/funnel-strategy.html`
+
+---
+
+### Output B — Landing Page HTML
+
+A proper, deployable landing page built from the landing page copy written in Step 3. It must look like an actual product landing page — not a document, not a dashboard.
+
+**Landing page structure and styling:**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[Lead Magnet Name] — [Your Name]</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; color: #111827; background: #fff; }
+
+    .lp-hero {
+      background: [PRIMARY];
+      color: #fff;
+      padding: 80px 24px 72px;
+      text-align: center;
+    }
+    .lp-hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.15;
+      max-width: 720px;
+      margin: 0 auto 20px;
+    }
+    .lp-hero p {
+      font-size: clamp(16px, 2.5vw, 20px);
+      opacity: 0.85;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .lp-body {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+
+    .lp-bullets { list-style: none; margin: 0 0 48px; }
+    .lp-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .lp-bullets li:last-child { border-bottom: none; }
+    .lp-check {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: [PRIMARY];
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .lp-check::after {
+      content: '';
+      width: 10px;
+      height: 6px;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(-45deg) translate(1px, -1px);
+    }
+
+    .lp-testimonial {
+      background: #f9fafb;
+      border-left: 4px solid [PRIMARY];
+      padding: 24px 28px;
+      border-radius: 0 8px 8px 0;
+      margin: 0 0 48px;
+    }
+    .lp-testimonial blockquote {
+      font-size: 17px;
+      line-height: 1.7;
+      font-style: italic;
+      color: #374151;
+      margin-bottom: 12px;
+    }
+    .lp-testimonial cite { font-size: 14px; color: #6b7280; font-style: normal; }
+
+    .lp-cta-wrap { text-align: center; margin-bottom: 16px; }
+    .lp-cta {
+      display: inline-block;
+      background: [PRIMARY];
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 18px 48px;
+      border-radius: 8px;
+      text-decoration: none;
+      width: 100%;
+      max-width: 400px;
+    }
+    .lp-trust {
+      text-align: center;
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .lp-hero { padding: 56px 20px 48px; }
+      .lp-body { padding: 48px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lp-hero">
+    <h1>[Headline from Step 3]</h1>
+    <p>[Subheadline from Step 3]</p>
+  </div>
+
+  <div class="lp-body">
+    <ul class="lp-bullets">
+      <li><span class="lp-check"></span>[Benefit bullet 1 from Step 3]</li>
+      <li><span class="lp-check"></span>[Benefit bullet 2 from Step 3]</li>
+      <li><span class="lp-check"></span>[Benefit bullet 3 from Step 3]</li>
+    </ul>
+
+    <div class="lp-testimonial">
+      <blockquote>[Social proof placeholder text from Step 3 — use "Insert testimonial here" styling]</blockquote>
+      <cite>[Avatar type] — [role/niche]</cite>
+    </div>
+
+    <div class="lp-cta-wrap">
+      <a href="#" class="lp-cta">[CTA button text from Step 3]</a>
+    </div>
+    <p class="lp-trust">[Trust line from Step 3]</p>
+  </div>
+
+</body>
+</html>
+```
+
+Fill in all `[bracketed]` placeholders with the actual content from Step 3. Substitute `[PRIMARY]` with the actual hex value.
+
+**If IS_MOMENTUM=true — insert Landing Page tab into 90-day-plan.html:**
+1. The landing page must look like an actual landing page inside the tab — use an `<iframe srcdoc="...">` to isolate its styles from the dashboard. Set the iframe to `width: 100%; height: 90vh; border: none;` and pass the full landing page HTML as the `srcdoc` attribute (HTML-encoded). OR embed the landing page HTML directly inside `<div class="tab-content" id="tab-landing-page">` with scoped styles (prefix all classes with `.tab-landing-page` to avoid conflicts).
+2. Preferred approach: direct embed with scoped styles (prefix every landing page CSS class with `#tab-landing-page ` so styles don't bleed into other tabs).
+3. Find `<!-- TAB-BUTTONS-END -->` and insert before it:
+   `<button class="tab-btn" data-tab="landing-page">Landing Page</button>`
+4. Find `<!-- TAB-CONTENT-END -->` and insert before it the scoped landing page HTML wrapped in:
+   `<div class="tab-content" id="tab-landing-page" style="padding:0;">[scoped landing page HTML]</div>`
+5. If tabs already exist, replace rather than insert.
+6. Save the modified `90-day-plan.html`.
+7. Tell the user: "Funnel Strategy and Landing Page tabs added to 90-day-plan.html."
+
+**If standalone (no Momentum folder):**
+- Save landing page as `[output_folder]/landing-page.html`
+- Tell the user the paths for both `funnel-strategy.html` and `landing-page.html`.
+
+---
+
 ## Hard Rules
 
 - The lead magnet must solve one specific problem. Never propose a generic "ultimate guide" or "complete overview." If you cannot name the specific pain it solves in one sentence, the concept is too broad.

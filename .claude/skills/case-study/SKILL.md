@@ -2,7 +2,7 @@
 name: case-study
 stage: feedback
 description: Use when a client has gotten a result and you need to turn it into proof. Takes a client result description (or interview notes) — outputs a before/after case study one-pager, a LinkedIn story post, a DM proof piece for sales conversations, and a referral ask template. Run after the first visible result from a client engagement. Standalone.
-argument-hint: [describe the client result: who, what changed, what numbers if available]
+argument-hint: [describe the client result: who, what changed, what numbers if available | optionally append a Momentum project folder path to add output to 90-day-plan.html]
 ---
 
 # Case Study — Turn a Client Result into Proof
@@ -177,6 +177,42 @@ Files:
 - `referral-ask.md` — referral ask template
 
 Tell the user the folder path. Remind them to get approval from the client before publishing the case study publicly. Suggest adding a "PDF attached" version (run /document-branded) for use as a leave-behind in sales conversations.
+
+---
+
+## Step 8: Generate HTML Output
+
+**Detect Momentum context:**
+- If `$ARGUMENTS` contained a path to a Momentum project folder (a folder containing `90-day-plan.html`), set `IS_MOMENTUM=true` and `MOMENTUM_FOLDER=[that path]`
+- If IS_MOMENTUM=true, also save the case study to `[MOMENTUM_FOLDER]/case-study-[client-slug].md`
+
+**Generate the HTML:**
+
+Create a self-contained case study one-pager HTML. This should look like a polished proof asset — something that could be shared with a prospect. Use `#1B6CA8` as the default primary color, or the Momentum project's brand color if available.
+
+Sections to render:
+- **Client Snapshot** — card at the top with client type/role, niche, and the result headline in large bold text
+- **Before / After** — two-column or stacked layout with labeled "Before" (red/warm accent border) and "After" (primary color border) sections. Include the key metrics as `[before value] → [after value]` lines.
+- **In Their Words** — styled blockquote with large quotation marks, attribution below
+- **What This Means** — the generalization paragraph in a callout box
+- **LinkedIn Post Preview** — the story post rendered as a social card (white card with slight shadow, post text inside, LinkedIn logo in corner)
+- **DM Proof Pieces** — Variant A and Variant B in separate shaded cards, labeled
+
+The HTML must be self-contained (no external CSS, CDN, or font links). Use `system-ui, -apple-system, sans-serif`.
+
+**If IS_MOMENTUM=true — update 90-day-plan.html:**
+1. Read `[MOMENTUM_FOLDER]/90-day-plan.html`
+2. Find `<!-- TAB-BUTTONS-END -->` and insert before it:
+   `<button class="tab-btn" data-tab="case-study">Case Study</button>`
+3. Find `<!-- TAB-CONTENT-END -->` and insert before it the full HTML content wrapped in:
+   `<div class="tab-content" id="tab-case-study">[rendered HTML content]</div>`
+4. If `data-tab="case-study"` already exists (re-run), replace the existing content block.
+5. Save the modified `90-day-plan.html`.
+6. Tell the user: "Case Study tab added to 90-day-plan.html."
+
+**If standalone (no Momentum folder):**
+- Save as `projects/case-studies/[client-slug]/[client-slug]-case-study.html`
+- Tell the user the path.
 
 ---
 

@@ -2,7 +2,7 @@
 name: content-engine
 stage: attention
 description: Use when someone needs to produce multi-platform content from a single idea. Takes a topic, brief, or path to niche-research or Momentum outreach.md — outputs a LinkedIn post, TikTok/Reels script, Instagram caption, Skool post, a repurposing map, and a 30-day content calendar. Reads brand-voice.md if available to match tone and pillars. Standalone or called after /brand-voice.
-argument-hint: [topic, brief, path to outreach.md, or path to niche-research brief]
+argument-hint: [topic or brief | path to outreach.md | path to niche-research brief | path to Momentum project folder (adds Content Engine tab to 90-day-plan.html)]
 ---
 
 # Content Engine — Multi-Platform Content from One Idea
@@ -243,6 +243,42 @@ Files:
 - `content-calendar.md` — updated or newly created calendar (at parent folder level: `projects/content-creation-system/drafts/content-calendar.md`)
 
 Tell the user the slug folder path and list the files saved. If this is the first time running Content Engine, remind them to run `/brand-voice` first to improve future output.
+
+---
+
+## Step 11: Generate HTML Output
+
+**Detect Momentum context:**
+- If `$ARGUMENTS` contained a path to a Momentum project folder (a folder containing `90-day-plan.html`), set `IS_MOMENTUM=true` and `MOMENTUM_FOLDER=[that path]`
+- If IS_MOMENTUM=true, also save the full content output to `[MOMENTUM_FOLDER]/content-engine-[topic-slug].md`
+
+**Generate the HTML:**
+
+Create a self-contained HTML file containing all platform outputs in a clean, readable layout. Use `#1B6CA8` as the default primary color, or the Momentum project's brand color if available.
+
+Sections to render:
+- **LinkedIn Post** — formatted as a post preview card (slightly off-white background, serif-feel font)
+- **TikTok/Reels Script** — script cards, direction notes `[in brackets]` styled in a muted color, each spoken line on its own row
+- **Instagram Captions** — 3 labeled variant cards (Short / Medium / Story), hashtag suggestions below each
+- **Skool Post** — peer-sharing card with a "Skool" label badge
+- **Repurposing Map** — styled paragraph block explaining how all pieces connect
+- **30-Day Content Calendar** — full HTML table with platform columns and weekly rows
+
+The HTML must be self-contained (no external CSS, CDN, or font links). Use `system-ui, -apple-system, sans-serif`.
+
+**If IS_MOMENTUM=true — update 90-day-plan.html:**
+1. Read `[MOMENTUM_FOLDER]/90-day-plan.html`
+2. Find `<!-- TAB-BUTTONS-END -->` and insert before it:
+   `<button class="tab-btn" data-tab="content-engine">Content Engine</button>`
+3. Find `<!-- TAB-CONTENT-END -->` and insert before it the full HTML content wrapped in:
+   `<div class="tab-content" id="tab-content-engine">[rendered HTML content]</div>`
+4. If `data-tab="content-engine"` already exists (re-run), replace the existing content block.
+5. Save the modified `90-day-plan.html`.
+6. Tell the user: "Content Engine tab added to 90-day-plan.html."
+
+**If standalone (no Momentum folder):**
+- Save HTML as `projects/content-creation-system/drafts/[topic-slug]/content-[topic-slug].html`
+- Tell the user the path.
 
 ---
 

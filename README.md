@@ -1,7 +1,3 @@
-﻿<p align="center">
-  <img src="assets/all_agents_hero_image.png" alt="The 5 Momentum Agents" width="100%" />
-</p>
-
 ```
 +----------------------------------------------------------------- v1.0 --+
 |                                                                          |
@@ -142,7 +138,7 @@ All frameworks are embedded directly in each skill file. No books, PDFs, or exte
 ```
 /momentum
 ```
-Runs the intake interview, confirms your profile, fires all 5 agents in sequence, and produces a `90-day-plan.md`.
+Runs the intake interview, confirms your profile, fires all 5 agents in sequence, and produces a `90-day-plan.html` — a tabbed dashboard branded to your colors. Run extended agents with the same folder path to add more tabs.
 
 ### Individual agents
 Each agent can be run standalone. Pass the project folder path as the argument:
@@ -165,16 +161,32 @@ All files are saved to `projects/momentum/[your-business-slug]/`:
 
 ```
 projects/momentum/[slug]/
-  profile.md        — your intake answers
-  market.md         — Hunter output
-  offer.md          — Alchemist output
-  outreach.md       — Amplifier output
-  sales.md          — Converter output
-  follow-up.md      — Loop Engine output
-  90-day-plan.html  — compiled final plan (styled HTML, print-ready, branded to your colors)
+  profile.md              — your intake answers
+  market.md               — Hunter output
+  offer.md                — Alchemist output
+  outreach.md             — Amplifier output
+  sales.md                — Converter output
+  follow-up.md            — Loop Engine output
+  90-day-plan.html        — tabbed dashboard (starts with 90-Day Plan tab; gains new tabs as extended agents run)
+  brand-voice.md          — added when /brand-voice is run with this folder
+  funnel.md               — added when /funnel-architect is run with this folder
+  landing-page.html       — standalone deployable landing page (added by /funnel-architect)
+  content-engine.md       — added when /content-engine is run with this folder
+  case-study-[slug].md    — added when /case-study is run with this folder
+  onboarding.md           — added when /client-onboard is run with this folder
+  sprints/                — weekly sprint files (added by /weekly-sprint)
 ```
 
-Start with `90-day-plan.html`. Open it in any browser. It contains everything you need without opening any sub-file.
+Start with `90-day-plan.html`. Open it in any browser. As you run extended agents and pass this folder path, the file gains new tabs — Brand Voice, Funnel Strategy, Landing Page, Content Engine, Case Study, Client Onboard — without replacing any existing content.
+
+**To add a tab to 90-day-plan.html**, pass the folder path to the relevant agent:
+```
+/brand-voice      projects/momentum/[slug]/
+/funnel-architect projects/momentum/[slug]/
+/content-engine   projects/momentum/[slug]/
+/case-study       projects/momentum/[slug]/
+/client-onboard   projects/momentum/[slug]/
+```
 
 ---
 
@@ -199,14 +211,16 @@ Start with `90-day-plan.html`. Open it in any browser. It contains everything yo
 
 Six additional agents that extend the Momentum system into a complete Solopreneur OS. Install alongside the core 5 by copying their skill folders into `.claude/skills/`.
 
-| Agent | Command | What it does | When to run |
-|-------|---------|--------------|-------------|
-| Brand Voice | `/brand-voice` | Builds the personal brand foundation: signature story, positioning one-liner, content pillars, platform bios (LinkedIn/TikTok/IG/Skool), tone/voice guide, and a 7-11-4 gap audit | Run once before Content Engine or Funnel Architect |
-| Content Engine | `/content-engine` | Takes one topic → LinkedIn post, TikTok/Reels script, Instagram caption, Skool post, repurposing map, and a 30-day content calendar | Any time you need platform-ready content from a single topic |
-| Funnel Architect | `/funnel-architect` | Builds the lead gen funnel: lead magnet concept, landing page copy, 5-email welcome sequence, platform bio CTAs, weekly posting rhythm, and a booking page brief | After Amplifier — when content is consistent and you need a structured lead capture layer |
-| Case Study | `/case-study` | Turns a client result into proof: pre-interview questions, before/after one-pager, LinkedIn story post, DM proof piece, and a referral ask template | After a client gets their first visible result |
-| Client Onboard | `/client-onboard` | Builds the professional first-7-days system: welcome message, kick-off call agenda, project brief, first-week milestone checklist, and communication cadence | The day a client closes |
-| Weekly Sprint | `/weekly-sprint` | Reads the 90-day plan and produces a specific Mon–Fri schedule for the current week, with Rule of 100 tracking, a daily log habit, and a Friday review | Every Monday — or auto-triggered by `/momentum` |
+When called with a Momentum project folder path, each extended agent saves its output as a `.md` file AND adds a new tab to `90-day-plan.html`. The dashboard grows as you run agents — no manual assembly required.
+
+| Agent | Command | HTML output | What it does | When to run |
+|-------|---------|-------------|--------------|-------------|
+| Brand Voice | `/brand-voice` | Brand Voice tab | Builds the personal brand foundation: signature story, positioning one-liner, content pillars, platform bios (LinkedIn/TikTok/IG/Skool), tone/voice guide, and a 7-11-4 gap audit | Run once before Content Engine or Funnel Architect |
+| Content Engine | `/content-engine` | Content Engine tab | Takes one topic → LinkedIn post, TikTok/Reels script, Instagram caption, Skool post, repurposing map, and a 30-day content calendar | Any time you need platform-ready content from a single topic |
+| Funnel Architect | `/funnel-architect` | Funnel Strategy tab + Landing Page tab | Builds the lead gen funnel: lead magnet concept, landing page copy, 5-email welcome sequence, platform bio CTAs, weekly posting rhythm, and a booking page brief. Also generates a standalone deployable landing page (`landing-page.html`). | After Amplifier — when content is consistent and you need a structured lead capture layer |
+| Case Study | `/case-study` | Case Study tab | Turns a client result into proof: pre-interview questions, before/after one-pager, LinkedIn story post, DM proof piece, and a referral ask template | After a client gets their first visible result |
+| Client Onboard | `/client-onboard` | Client Onboard tab | Builds the professional first-7-days system: welcome message, kick-off call agenda, project brief, first-week milestone checklist, and communication cadence | The day a client closes |
+| Weekly Sprint | `/weekly-sprint` | — | Reads the 90-day plan and produces a specific Mon–Fri schedule for the current week, with Rule of 100 tracking, a daily log habit, and a Friday review | Every Monday — or auto-triggered by `/momentum` |
 
 ### The Extended Agent Descriptions
 

@@ -2,7 +2,7 @@
 name: brand-voice
 stage: offer
 description: Use when building or clarifying a personal brand from scratch. Produces a signature story, positioning one-liner, 3–5 content pillars, platform bios for LinkedIn/TikTok/Instagram/Skool, a tone/voice guide, and a 7-11-4 gap audit. Run this once as a foundation — other agents (Content Engine, Funnel Architect) produce better output when this exists. Can also be run by /momentum after offer is built.
-argument-hint: [leave blank to start the intake, or describe yourself briefly to pre-fill answers]
+argument-hint: [leave blank to start the intake | briefly describe yourself to pre-fill | path to Momentum project folder to integrate output into 90-day-plan.html]
 ---
 
 # Brand Voice — Build the Personal Brand Foundation
@@ -292,6 +292,42 @@ Example: [Sentence]
 ```
 
 Tell the user the file was saved and the path. Remind them to run `/content-engine` to start producing content from their pillars, and `/funnel-architect` to build the lead gen system.
+
+---
+
+## Step 11: Generate HTML Output
+
+**Detect Momentum context:**
+- If `$ARGUMENTS` contained a path to a Momentum project folder (a folder containing `90-day-plan.html`), set `IS_MOMENTUM=true` and `MOMENTUM_FOLDER=[that path]`
+- Also save a copy of the brand voice output to `[MOMENTUM_FOLDER]/brand-voice.md`
+
+**Generate the HTML:**
+
+Create a self-contained HTML file with the full brand voice guide styled as a reference document. Use `#1B6CA8` as the default primary color, or the brand color from the Momentum project if available.
+
+Sections to render:
+- **Signature Story** — blockquote-style card with the full written version and spoken summary below it
+- **Positioning One-Liner** — large callout box, the selected one-liner prominently displayed
+- **Content Pillars** — grid of 3–5 cards, each with pillar name, angle, and 2 example topics
+- **Platform Bios** — card per platform (LinkedIn headline + about, TikTok, Instagram, Skool), character count shown
+- **Tone & Voice Guide** — 5 rules listed, each with the example sentence
+- **7-11-4 Gap Audit** — table or status grid showing current score vs. threshold for each dimension, plus priority action
+
+The HTML must be self-contained (no external CSS, CDN, or font links). Use `system-ui, -apple-system, sans-serif`.
+
+**If IS_MOMENTUM=true — update 90-day-plan.html:**
+1. Read `[MOMENTUM_FOLDER]/90-day-plan.html`
+2. Find `<!-- TAB-BUTTONS-END -->` and insert before it:
+   `<button class="tab-btn" data-tab="brand-voice">Brand Voice</button>`
+3. Find `<!-- TAB-CONTENT-END -->` and insert before it the full HTML content wrapped in:
+   `<div class="tab-content" id="tab-brand-voice">[rendered HTML content]</div>`
+4. If `data-tab="brand-voice"` already exists (re-run), replace the existing `<div class="tab-content" id="tab-brand-voice">...</div>` block instead.
+5. Save the modified `90-day-plan.html`.
+6. Tell the user: "Brand Voice tab added to 90-day-plan.html."
+
+**If standalone (no Momentum folder):**
+- Save as `references/brand/brand-voice.html`
+- Tell the user the path.
 
 ---
 
