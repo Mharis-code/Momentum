@@ -92,7 +92,7 @@ Takes the validated market and builds an offer that cannot be compared to a comp
 Builds the daily system to get the offer in front of the right people. Applies Hormozi's Core Four priority order — warm outreach first, content second, cold outreach third, paid ads last (and only after Rung 2). Designs a Rule of 100 daily rhythm (100 touches or 100 minutes of content per day). Writes 3 ACA DM templates (Acknowledge, Compliment, Ask) specific to the offer's avatar and 3 Hook-Retain-Reward content units using the avatar's own pain language. Recommends 1-2 platforms based on where the avatar actually gathers.
 
 ### 4. Converter — Build the Sales System
-Turns conversations into closed clients. Builds a full CLOSER talk track (Clarify, Label, Overview, Sell the vacation, Explain away concerns, Reinforce the decision) written specifically for this offer — not a generic script. Applies two critical reframes: diagnose before prescribing (doctor, not pharmacist) and lead with the prospect's pressure, not the technology. Also produces a pre-call brief template to fill in before every call, a post-call follow-up email to send within 5 minutes of hanging up, and a same-day onboarding message to send the day you close.
+Turns conversations into closed clients. Builds a full CLOSER talk track (Clarify, Label, Overview, Sell the vacation, Explain away concerns, Reinforce the decision) written specifically for this offer — not a generic script. Applies two critical reframes: diagnose before prescribing and lead with the prospect's pressure, not the technology. Also produces a pre-call brief template to fill in before every call, a post-call follow-up email to send within 5 minutes of hanging up, and a same-day onboarding message to send the day you close.
 
 ### 5. Loop Engine — Keep the Momentum
 Most revenue is lost in the silence after a sales conversation. Loop Engine closes that gap. Builds a closed-client sequence that captures testimonials at the right moment and asks for referrals in 3 different ways. Creates a 4-message "no" reactivation sequence at 7, 14, 30, and 90 days — using Dean Jackson's 9-word email format at days 14 and 90. Builds a 3-step ghost bump sequence for prospects who went cold mid-conversation. Includes an objection log template that feeds back into the Alchemist to continuously improve the offer.
@@ -188,18 +188,6 @@ Start with `90-day-plan.html`. Open it in any browser. It contains everything yo
 - **Hook → Retain → Reward** — content unit structure
 - **CLOSER framework** — Clarify, Label, Overview, Sell, Explain, Reinforce (sales call structure)
 - **Dean Jackson 9-word email** — reactivation message format
-- **Consultative selling** — diagnose before prescribing (doctor, not pharmacist)
-
----
-
-## Customization
-
-Each agent is a plain markdown file — open and edit directly. Common customizations:
-
-- **Change the intake questions** — edit Step 2 in `momentum/SKILL.md`
-- **Add a niche-specific context** — add a section to each skill with industry-specific guidance
-- **Adjust output paths** — change `projects/momentum/[slug]/` to a different folder in each skill
-- **Add a 6th agent** — follow the same SKILL.md format and add a `Skill()` call in `momentum/SKILL.md`
 
 ---
 
@@ -243,6 +231,8 @@ Built as a Claude Code agent. A Claude Code agent is a set of skills — plain m
 ---
 
 ## Disclaimer
+
+**The Business Loop** (Offer → Attention → Conversion → Delivery → Feedback) is a framework created by Muhammad Haris. All rights reserved.
 
 This project is an independent educational tool built for personal productivity purposes. It is not affiliated with, endorsed by, or officially connected to Alex Hormozi / Acquisition.com, Daniel Priestley / Dent Global, Russell Brunson / ClickFunnels, or Nate Herk.
 
