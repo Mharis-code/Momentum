@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/all_agents_hero_image_2.png" alt="The 5 Momentum Agents" width="100%" />
-</p>
-
 ```
 +----------------------------------------------------------------- v1.0 --+
 |                                                                          |
